@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Action first -->
+        <record id="action_finance_record_view" model="ir.actions.act_window">
+            <field name="name">Record</field>
+            <field name="res_model">finance.record</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="action_finance_dashboard" model="ir.actions.client">
+            <field name="name">Finance Dashboard</field>
+            <field name="tag">finance.dashboard</field>
+        </record>
+
+        <!-- Parent Menu -->
+        <menuitem id="menu_finance_root"
+                  name="Finance"
+                  sequence="1"/>
+
+        <!-- Child Menu -->
+        <menuitem id="menu_finance_dashboard"
+                  name="Dashboard"
+                  parent="menu_finance_root"
+                  action="action_finance_dashboard"
+                  sequence="10"/>
+        <menuitem id="menu_finance_records"
+                  name="Records"
+                  parent="menu_finance_root"
+                  action="action_finance_record_view"
+                  sequence="20"/>
+
+    </data>
+</odoo>

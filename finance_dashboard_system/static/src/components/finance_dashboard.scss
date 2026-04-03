@@ -1,0 +1,131 @@
+.o_finance_dashboard {
+    padding: 24px;
+    background: #f7f8fa;
+    height: 100%;
+    overflow-y: auto;
+
+    .o_finance_loading {
+        text-align: center;
+        padding: 60px;
+        color: #888;
+        font-size: 16px;
+    }
+
+    // Summary Cards
+    .o_finance_cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 24px;
+
+        .o_finance_card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px 24px;
+            position: relative;
+            border: 1px solid #eee;
+            overflow: hidden;
+
+            .card_label {
+                font-size: 12px;
+                text-transform: uppercase;
+                letter-spacing: 0.06em;
+                color: #888;
+                margin-bottom: 8px;
+            }
+
+            .card_value {
+                font-size: 28px;
+                font-weight: 600;
+                color: #1a2e4a;
+            }
+
+            .card_icon {
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 32px;
+                opacity: 0.08;
+            }
+
+            &.income { border-left: 4px solid #1D9E75; .card_icon { color: #1D9E75; opacity: 0.15; } }
+            &.expense { border-left: 4px solid #E24B4A; .card_icon { color: #E24B4A; opacity: 0.15; } }
+            &.net { border-left: 4px solid #378ADD; .card_icon { color: #378ADD; opacity: 0.15; } }
+        }
+    }
+
+    // Middle Section
+    .o_finance_middle {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    // Boxes
+    .o_finance_chart_box,
+    .o_finance_category_box,
+    .o_finance_recent_box {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px 24px;
+        border: 1px solid #eee;
+
+        .box_title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a2e4a;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+    }
+
+    // Table
+    .o_finance_table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+
+        th {
+            text-align: left;
+            padding: 8px 10px;
+            color: #888;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #f9f9f9;
+            color: #333;
+        }
+
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #fafafa; }
+
+        .text_muted { color: #aaa; }
+    }
+
+    // Badges
+    .o_badge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: capitalize;
+
+        &.badge_income {
+            background: #e1f5ee;
+            color: #0f6e56;
+        }
+        &.badge_expense {
+            background: #fcebeb;
+            color: #a32d2d;
+        }
+    }
+}

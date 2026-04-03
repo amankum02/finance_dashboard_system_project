@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <!-- list view -->
+        <record id="view_finance_record_list" model="ir.ui.view">
+            <field name="name">finance.record.list</field>
+            <field name="model">finance.record</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="type"/>
+                    <field name="category"/>
+                    <field name="date"/>
+                    <field name="currency_id" column_invisible="1"/>
+                    <field name="amount"
+                        widget="monetary"
+                        options="{'currency_field': 'currency_id'}"
+                        sum="Total Amount"/>
+                </list>
+            </field>
+        </record>
+        
+        <!-- form view -->
+        <record id="view_finance_record_form" model="ir.ui.view">
+            <field name="name">finance.record.form</field>
+            <field name="model">finance.record</field>
+            <field name="arch" type="xml">
+                <form string="Financial Record">
+                    <sheet>
+
+                        <div class="oe_title">
+                            <h1>
+                                <field name="amount"
+                                    widget="monetary"
+                                    options="{'currency_field': 'currency_id'}"
+                                    placeholder="0.00"/>
+                            </h1>
+                        </div>
+
+                        <notebook>
+                            <page string="Notes">
+                                <group>
+                                    <group string="Transaction Details">
+                                        <field name="type"/>
+                                        <field name="category"/>
+                                    </group>
+
+                                    <group string="Additional Information">
+                                        <field name="date"/>
+                                        <field name="currency_id" invisible="1"/>
+                                        <field name="notes" placeholder="Add notes or remarks..."/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- serach view -->
+        <record id="view_finance_record_search" model="ir.ui.view">
+            <field name="name">finance.record.search</field>
+            <field name="model">finance.record</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="type"/>
+                    <field name="category"/>
+                    <field name="date"/>
+
+                    <!-- Filters -->
+                    <filter name="income" string="Income" domain="[('type','=','income')]"/>
+                    <filter name="expense" string="Expense" domain="[('type','=','expense')]"/>
+
+                    <!-- Group By -->
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_type" string="Type" context="{'group_by':'type'}"/>
+                        <filter name="group_by_category" string="Category" context="{'group_by':'category'}"/>
+                        <filter name="group_by_date" string="Date" context="{'group_by':'date'}"/>
+
+                    </group>
+                </search>
+            </field>
+        </record>
+    
+    </data>
+    
+
+</odoo>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="finance.Dashboard">
+        <div class="o_finance_dashboard">
+
+            <!-- Loading -->
+            <div t-if="state.loading" class="o_finance_loading">
+                <i class="fa fa-spinner fa-spin"/> Loading...
+            </div>
+
+            <!-- Dashboard Content -->
+            <div t-if="!state.loading">
+                <!-- Summary Cards -->
+                <div class="o_finance_cards">
+                    <div class="o_finance_card income" t-on-click="openIncomeList">
+                        <div class="card_label">Total Income</div>
+                        <div class="card_value">
+                            <t t-esc="state.summary.total_income?.toLocaleString('en-IN', {minimumFractionDigits: 2})"/>
+                        </div>
+                        <i class="fa fa-arrow-up card_icon"/>
+                    </div>
+                    <div class="o_finance_card expense" t-on-click="openExpenseList">
+                        <div class="card_label">Total Expense</div>
+                        <div class="card_value">
+                            <t t-esc="state.summary.total_expense?.toLocaleString('en-IN', {minimumFractionDigits: 2})"/>
+                        </div>
+                        <i class="fa fa-arrow-down card_icon"/>
+                    </div>
+                    <div class="o_finance_card net" t-on-click="openAllList">
+                        <div class="card_label">Net Balance</div>
+                        <div class="card_value">
+                            <t t-esc="state.summary.net_balance?.toLocaleString('en-IN', {minimumFractionDigits: 2})"/>
+                        </div>
+                        <i class="fa fa-wallet card_icon"/>
+                    </div>
+                </div>
+
+                <!-- Chart + Category -->
+                <div class="o_finance_middle">
+                    <div class="o_finance_chart_box">
+                        <div class="box_title">Monthly Trends</div>
+                        <canvas t-ref="financeChart" height="120"/>
+                    </div>
+                    <div class="o_finance_category_box">
+                        <div class="box_title">Category Totals</div>
+                        <table class="o_finance_table">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Income</th>
+                                    <th>Expense</th>
+                                    <th>Net</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="state.categoryTotals" t-as="cat" t-key="cat.category">
+                                    <tr>
+                                        <td><t t-esc="cat.category"/></td>
+                                        <td class="text-success"><t t-esc="cat.income?.toFixed(2)"/></td>
+                                        <td class="text-danger"><t t-esc="cat.expense?.toFixed(2)"/></td>
+                                        <td><t t-esc="cat.net?.toFixed(2)"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="o_finance_recent_box">
+                    <div class="box_title">Recent Activity</div>
+                    <table class="o_finance_table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="state.recentActivity" t-as="rec" t-key="rec.id">
+                                <tr t-on-click="() => this.openRecord(rec.id)" style="cursor: pointer;">
+                                    <td><t t-esc="rec.date"/></td>
+                                    <td>
+                                        <span t-attf-class="o_badge {{ rec.type === 'income' ? 'badge_income' : 'badge_expense' }}">
+                                            <t t-esc="rec.type"/>
+                                        </span>
+                                    </td>
+                                    <td><t t-esc="rec.category"/></td>
+                                    <td><t t-esc="rec.currency"/> <t t-esc="rec.amount?.toFixed(2)"/></td>
+                                    <td class="text_muted"><t t-esc="rec.notes || '—'"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </t>
+</templates>

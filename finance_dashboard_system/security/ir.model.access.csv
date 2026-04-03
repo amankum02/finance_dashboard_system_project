@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_viewer,viewer,model_finance_record,base.group_user,1,0,0,0
+access_analyst,analyst,model_finance_record,base.group_user,1,0,0,0
+access_admin,admin,model_finance_record,base.group_system,1,1,1,1
+
+access_finance_record_viewer,finance_record_viewer,model_finance_record,finance_dashboard_system.group_viewer,1,0,0,0
+access_finance_record_analyst,finance_record_analyst,model_finance_record,finance_dashboard_system.group_analyst,1,0,0,0
+access_finance_record_admin,finance_record_admin,model_finance_record,finance_dashboard_system.group_admin,1,1,1,1
